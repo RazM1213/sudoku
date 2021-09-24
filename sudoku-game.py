@@ -29,6 +29,8 @@ def main():
     pygame.display.set_caption('Sudoku')
     win.fill(background_color)
     myfont = pygame.font.SysFont('comicsans',35)
+    label = myfont.render('S U D O K U', True, (255,0,0))
+    win.blit(label, (208, 20))
 
     for i in range(0,10):
         if (i % 3 == 0):
