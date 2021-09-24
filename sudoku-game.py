@@ -1,8 +1,14 @@
 import pygame
+import requests
 
 #Setting up pygame:
 WIDTH = 550
 background_color = (251,247,245)
+
+#Sudoku generator api:
+response = requests.get('https://sugoku.herokuapp.com/board?difficulty=easy')
+grid = response.json()['board']
+grid_original = [[grid[x][y] for y in range(len(grid[0]))] for x in range(len(grid))]
 
 def main():
     pygame.init()
