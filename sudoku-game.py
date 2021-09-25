@@ -57,18 +57,21 @@ def insert(win,position):
                     pygame.display.update()
                     return
                 return
-
-def main():
-    for i in range(0,10):
+def draw_grid():
+    for i in range(0, 10):
         if (i % 3 == 0):
-            #Every third line is bold
+            # Every third line is bold
             pygame.draw.line(win, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i, 500), 4)
             pygame.draw.line(win, (0, 0, 0), (50, 50 + 50 * i), (500, 50 + 50 * i), 4)
 
-        pygame.draw.line(win, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i,500), 2)
+        pygame.draw.line(win, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i, 500), 2)
         pygame.draw.line(win, (0, 0, 0), (50, 50 + 50 * i), (500, 50 + 50 * i), 2)
     pygame.display.update()
 
+def fill_grid():
+    pass
+
+def main():
     #Filling the grid with values:
     #grid[0] is the value for board key in grid json
     for i in range(len(grid[0])):
