@@ -23,6 +23,9 @@ grid_original = [[grid[x][y] for y in range(len(grid[0]))] for x in range(len(gr
 [8,0,2,5,0,4,0,7,3]
 '''
 
+def insert(win,position):
+    pass
+
 def main():
     pygame.init()
     win = pygame.display.set_mode((WIDTH,WIDTH))
@@ -55,6 +58,9 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return
+            if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                insert(win, (pos//50, pos//50))
 
 
 if __name__ == '__main__':
