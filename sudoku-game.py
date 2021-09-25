@@ -69,18 +69,19 @@ def draw_grid():
     pygame.display.update()
 
 def fill_grid():
-    pass
-
-def main():
-    #Filling the grid with values:
-    #grid[0] is the value for board key in grid json
+    # Filling the grid with values:
+    # grid[0] is the value for board key in grid json
     for i in range(len(grid[0])):
         for j in range(len(grid[0])):
-            if (0<grid[i][j]<10):
-                value = myfont.render(str(grid[i][j]), True, grid_original_element_color )
-                win.blit(value, (50 * (j + 1) + 15, 50 * (i + 1) + 15 ))
+            if (0 < grid[i][j] < 10):
+                value = myfont.render(str(grid[i][j]), True, grid_original_element_color)
+                win.blit(value, (50 * (j + 1) + 15, 50 * (i + 1) + 15))
 
     pygame.display.update()
+
+def main():
+    draw_grid()
+    fill_grid()
     x = True
     while x:
         for event in pygame.event.get():
