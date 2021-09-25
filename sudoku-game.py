@@ -4,17 +4,13 @@ import requests
 #Setting up pygame:
 pygame.init()
 
+#GLOBAL VARIABLES:
 WIDTH = 550
 background_color = (251,247,245)
 grid_original_element_color = (52,21,51)
 buffer = 10
-
 win = pygame.display.set_mode((WIDTH, WIDTH))
-pygame.display.set_caption('Sudoku')
-win.fill(background_color)
 myfont = pygame.font.SysFont('comicsans', 35)
-label = myfont.render('S U D O K U', True, (255, 0, 0))
-win.blit(label, (208, 20))
 
 #Sudoku generator api:
 response = requests.get('https://sugoku.herokuapp.com/board?difficulty=easy')
@@ -57,6 +53,7 @@ def insert(win,position):
                     pygame.display.update()
                     return
                 return
+
 def draw_grid():
     for i in range(0, 10):
         if (i % 3 == 0):
@@ -79,7 +76,14 @@ def fill_grid():
 
     pygame.display.update()
 
+def setup_game():
+    pygame.display.set_caption('Sudoku')
+    win.fill(background_color)
+    label = myfont.render('S U D O K U', True, (255, 0, 0))
+    win.blit(label, (208, 20))
+
 def main():
+    setup_game()
     draw_grid()
     fill_grid()
     x = True
