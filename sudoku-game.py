@@ -5,6 +5,7 @@ import requests
 WIDTH = 550
 background_color = (251,247,245)
 grid_original_element_color = (52,21,51)
+buffer = 10
 
 #Sudoku generator api:
 response = requests.get('https://sugoku.herokuapp.com/board?difficulty=easy')
@@ -24,7 +25,27 @@ grid_original = [[grid[x][y] for y in range(len(grid[0]))] for x in range(len(gr
 '''
 
 def insert(win,position):
-    pass
+    i,j = position[1], position[0]
+    myfont = pygame.font.SysFont('comicsans', 35)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == 48: #48 is ascii code for the number 0
+                    grid[i-1][j-1] = 0
+                    pygame.draw.rect(win, background_color, (position[0]*50 + buffer, position[1]*50 + buffer, 50 - buffer, 50- buffer))
+                    pygame.display.update()
+
+                if (0 < event.key - 48 < 10):
+                    pygame.draw.rect(win, background_color, (
+                    position[0] * 50 + buffer , position[1] * 50 + buffer , 50 - buffer , 50 - buffer ))
+                    value = myfont.render(str(event.key - 48), True, (255, 0, 0))
+                    win.blit(value, (position[0] * 50 + 15, position[1] * 50 + 15))
+                    grid[i - 1][j - 1] = event.key - 48
+                    pygame.display.update()
 
 def main():
     pygame.init()
@@ -60,7 +81,7 @@ def main():
                 return
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 pos = pygame.mouse.get_pos()
-                insert(win, (pos//50, pos//50))
+                insert(win, (pos[0]//50, pos[1]//50))
 
 
 if __name__ == '__main__':
