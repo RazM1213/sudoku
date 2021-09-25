@@ -28,16 +28,16 @@ def insert(win,position):
     i,j = position[1], position[0]
     myfont = pygame.font.SysFont('comicsans', 35)
 
-    while True:
+    while True:#The returns here serve as break in a loop - they take us out of the function!
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
-
+                return
             if event.type == pygame.KEYDOWN:
                 if event.key == 48: #48 is ascii code for the number 0
                     grid[i-1][j-1] = 0
                     pygame.draw.rect(win, background_color, (position[0]*50 + buffer, position[1]*50 + buffer, 50 - buffer, 50- buffer))
                     pygame.display.update()
+                    return
 
                 if (0 < event.key - 48 < 10):
                     pygame.draw.rect(win, background_color, (
@@ -46,6 +46,8 @@ def insert(win,position):
                     win.blit(value, (position[0] * 50 + 15, position[1] * 50 + 15))
                     grid[i - 1][j - 1] = event.key - 48
                     pygame.display.update()
+                    return
+                return
 
 def main():
     pygame.init()
@@ -64,6 +66,7 @@ def main():
 
         pygame.draw.line(win, (0, 0, 0), (50 + 50 * i, 50), (50 + 50 * i,500), 2)
         pygame.draw.line(win, (0, 0, 0), (50, 50 + 50 * i), (500, 50 + 50 * i), 2)
+    pygame.display.update()
 
     #Filling the grid with values:
     #grid[0] is the value for board key in grid json
@@ -74,11 +77,12 @@ def main():
                 win.blit(value, (50 * (j + 1) + 15, 50 * (i + 1) + 15 ))
 
     pygame.display.update()
-    while True:
+    x = True
+    while x:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                return
+                x = False
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 pos = pygame.mouse.get_pos()
                 insert(win, (pos[0]//50, pos[1]//50))
